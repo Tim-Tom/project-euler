@@ -32,7 +32,7 @@ project ProjectEuler is
             for Default_Switches ("ada") use ("-gnatwa", "-gnatf", "-gnat2012", "-gnatVn", "-gnatp", "-O3", "-gnatn", "-funroll-loops", "-march=core2");
 
          when "Debug" =>
-            for Default_Switches ("ada") use ("-gnatwa", "-g", "-gnatf", "-gnat2012", "-gnato", "-gnatVn", "-fstack-check", "-gnatE", "-fno-inline", "-O0", "-gnata", "-gnatE" );
+            for Default_Switches ("ada") use ("-gnatwa", "-g", "-gnatf", "-gnat2012", "-gnato", "-gnatVn", "-fstack-check", "-gnatE", "-fno-inline", "-O0", "-gnata", "-gnatE", "-gnatVa" );
       end case;
    end Compiler;
 

@@ -1,27 +1,25 @@
 with Ada.Text_IO;
---with PrimeUtilities;
+with PrimeUtilities;
 
 package body Problem_69 is
    package IO renames Ada.Text_IO;
-   subtype One_Million is Integer range 1 .. 10;
+   subtype One_Million is Integer range 1 .. 1_000_000;
    best : One_Million := 1;
    best_ratio : Float := 1.0;
---   package Million_Primes is new PrimeUtilities(One_Million);
+   package Million_Primes is new PrimeUtilities(One_Million);
    procedure Solve is
-      -- sieve : Million_Primes.Sieve := Million_Primes.Genmerate_Sieve(One_Million'Last);
+      sieve : constant Million_Primes.Sieve := Million_Primes.Generate_Sieve(One_Million'Last);
    begin
       for num in 2 .. One_Million'Last loop
          declare
-            totient : Positive := 1;
+            totient : Float := 1.0;
             ratio : Float;
+            factors : constant Million_Primes.Prime_Factors := Million_Primes.Generate_Prime_Factors(num, sieve);
          begin
-            for div in 2 .. num - 1 loop
-               if num mod div /= 0 then
-                  IO.Put_Line(Integer'Image(num) & " is relatively prime to " & Integer'Image(div));
-                  totient := totient + 1;
-               end if;
+            for i in factors'Range loop
+               totient := totient * (1.0 - 1.0 / Float(factors(i).prime));
             end loop;
-            ratio := Float(num) / Float(totient);
+            ratio := 1.0 / totient;
             if ratio > best_ratio then
                best := num;
                best_ratio := ratio;

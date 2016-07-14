@@ -1,0 +1,51 @@
+project ProjectEuler is
+
+   for Main use ("ProjectEuler.adb");
+   for Object_Dir use "obj";
+   for Exec_Dir use ".";
+   for Source_Dirs use ("inc", "src");
+   type Build_Type is
+      ("Release", "Debug");
+   Build : Build_Type := external ("Build", "Debug");
+
+   package Naming is
+      for Casing use "MixedCase";
+   end Naming;
+
+   package Builder is
+
+      case Build is
+
+         when "Release" =>
+            for Default_Switches ("ada") use ("-s", "-j2");
+
+         when "Debug" =>
+            for Default_Switches ("ada") use ("-s", "-j2", "-g");
+      end case;
+   end Builder;
+
+   package Compiler is
+
+      case Build is
+
+         when "Release" =>
+            for Default_Switches ("ada") use ("-gnatwa", "-gnatf", "-gnat12", "-gnatVn", "-gnatp", "-O3", "-gnatn", "-funroll-loops", "-march=core2");
+
+         when "Debug" =>
+            for Default_Switches ("ada") use ("-gnatwa", "-g", "-gnatf", "-gnat12", "-gnato", "-gnatVn", "-fstack-check", "-gnatE");
+      end case;
+   end Compiler;
+
+   package Linker is
+
+      case Build is
+
+         when "Release" =>
+
+         when "Debug" =>
+
+      end case;
+   end Linker;
+
+end ProjectEuler;
+

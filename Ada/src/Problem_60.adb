@@ -102,6 +102,8 @@ package body Problem_60 is
       pairs : Positive_Pair_Vectors.Vector;
       triples : Positive_Triple_Vectors.Vector;
    begin
+      IO.Put_Line("Some SQL Output");
+      return;
       for first_prime_index in sieve'First .. sieve'Last - 1 loop
          for second_prime_index in first_prime_index + 1 .. sieve'Last loop
             exit when Scale(sieve(first_prime_index)) + Scale(sieve(second_prime_index)) >= max_prime_scale;

@@ -67,6 +67,8 @@ package body Problem_59 is
       valid_Characters : Array (Key_Array'Range) of Character_Vector.Vector;
       possible_solutions : Natural := 1;
    begin
+      IO.Put_Line("GOD");
+      return;
       Read_Input(encrypted);
       for ch in Character range 'a' .. 'z' loop
          for index in valid_Characters'Range loop

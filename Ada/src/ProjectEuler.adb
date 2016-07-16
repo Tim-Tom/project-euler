@@ -69,6 +69,7 @@ with Problem_66;
 with Problem_67;
 with Problem_68;
 with Problem_69;
+with Problem_70;
 procedure ProjectEuler is
    package IO renames Ada.Text_IO;
    choice : constant String := Ada.Command_Line.Argument(1);
@@ -211,6 +212,8 @@ begin
       IO.Put("68: "); Problem_68.Solve;
    elsif choice = "69" then
       IO.Put("69: "); Problem_69.Solve;
+   elsif choice = "70" then
+      IO.Put("70: "); Problem_70.Solve;
    else
       IO.Put_Line("Unknown choice: " & choice);
    end if;

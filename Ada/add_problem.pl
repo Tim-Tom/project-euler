@@ -33,7 +33,7 @@ END_BODY
     }
 }
 
-open(my $main, '>', "src/ProjectEuler2.adb") or die;
+open(my $main, '>', "src/ProjectEuler.adb") or die;
 print $main <<END_INCLUDES;
 with Ada.Text_IO;
 with Ada.Command_Line;

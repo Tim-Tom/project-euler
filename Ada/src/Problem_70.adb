@@ -22,7 +22,7 @@ package body Problem_70 is
    procedure Solve is
       sieve : constant Long_Sieve := Make_Long_Float_Sieve;
       best : Ten_Million := 1;
-      best_ratio : Long_Float := 99999.0;
+      best_ratio : Long_Float := 0.0;
       function Convert(num : Long_Float) return Digit_Count is
          num_cnv : constant Ten_Million := Ten_Million(Long_Float'Rounding(num));
          str : constant String := Ten_Million'Image(num_cnv);
@@ -43,10 +43,8 @@ package body Problem_70 is
                return;
             end if;
          end loop;
-         if (1.0 / ratio) < best_ratio then
-            best := Ten_Million(Long_Float'Rounding(num));
-            best_ratio := 1.0 / ratio;
-         end if;
+         best := Ten_Million(Long_Float'Rounding(num));
+         best_ratio := ratio;
       end Check;
       procedure Solve_Recursive(min_index : Positive; start_ratio : Long_Float; So_Far : Long_Float) is
          prime : Long_Float;
@@ -59,7 +57,9 @@ package body Problem_70 is
             ratio := start_ratio * ((prime - 1.0) / prime);
             exit when total > Max_Double or ratio < 0.1;
             loop
-               Check(total, ratio);
+               if ratio > best_ratio then
+                  Check(total, ratio);
+               end if;
                Solve_Recursive(prime_index + 1, ratio, total);
                total := total * prime;
                exit when total > Max_Double;
